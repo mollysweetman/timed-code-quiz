@@ -4,8 +4,10 @@ var initials = document.querySelector('.initials-container');
 var startButton = document.getElementById('start');
 
 var questionItem = document.getElementById('questions');
-var answerButtons = document.getElementById('answer-btn');
-var addScore = 0;
+var answerList = document.getElementById('answerOptions');
+
+var numberOfQuestionEl = 0;
+var answer;
 
 
 hideElement(resultsContainer);
@@ -17,7 +19,6 @@ var testTime = 60;
 var secondsInterval;
 
 
-
 function showElement(elementToShow) {
   elementToShow.style.display = 'block'
   
@@ -27,8 +28,6 @@ function showElement(elementToShow) {
   
     }
     
-
-
 
 // function startQuiz(questions) {
 //   // first question displays
@@ -44,7 +43,7 @@ startTimer.addEventListener('click', function () {
   secondsInterval = setInterval(function () {
     testTime--;
     showTime.innerText = testTime;
-    if (testTime === 0) {
+    if (testTime === 0 || numberOfQuestionEl === questions.length) {
       clearInterval(secondsInterval);
     }
 
@@ -57,6 +56,25 @@ startTimer.addEventListener('click', function () {
 function startGame() {
  startButton.addEventListener('click', startGame())
   startButton.style.display = 'hide';
+
+numberOfQuestionEl++;
+answer = questions[numberOfQuestionEl].answer
+
+questionItem.textContent = questions[numberOfQuestionEl].testQuestions;
+answerList.innerText = "";
+
+var quizOptions = questions[numberOfQuestionEl].quizOptions;
+
+
+for (var i =o; i < quizOptions.length; i++) {
+    var nextQuestion = document.createElement("Qbtn");
+
+    nextQuestion.textContent = quizOptions[i];
+    answer = quizOptions.appendChild(nextQuestion);
+
+}
+
+
 
   var choiceButton = document.createElement("button");
   choiceButton.setAttribute("class" ,"options");
