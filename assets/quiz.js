@@ -4,7 +4,7 @@ var initials = document.querySelector('.initials-container');
 var startButton = document.getElementById('start');
 
 var questionItem = document.getElementById('questions');
-var answerList = document.getElementById('answerOptions');
+var answerList = document.querySelectorAll('.answerOptions');
 
 var numberOfQuestionEl = 0;
 var answer;
@@ -21,13 +21,13 @@ var secondsInterval;
 
 function showElement(elementToShow) {
   elementToShow.style.display = 'block'
-  
-  }
-  function hideElement(elementToHide) {
-    elementToHide.style.display = 'none'
-  
-    }
-    
+
+}
+function hideElement(elementToHide) {
+  elementToHide.style.display = 'none'
+
+}
+
 
 // function startQuiz(questions) {
 //   // first question displays
@@ -53,58 +53,71 @@ startTimer.addEventListener('click', function () {
 
 
 
-function startGame() {
- startButton.addEventListener('click', startGame())
+startButton.addEventListener('click', startGame)
+
+function startGame(event) {
   startButton.style.display = 'hide';
 
-numberOfQuestionEl++;
-answer = questions[numberOfQuestionEl].answer
+  var currentQ = questions[numberOfQuestionEl]
 
-questionItem.textContent = questions[numberOfQuestionEl].testQuestions;
-answerList.innerText = "";
+  numberOfQuestionEl++;
+  answer = currentQ.answer
 
-var quizOptions = questions[numberOfQuestionEl].quizOptions;
+  questionItem.textContent = currentQ.testQuestions;
+  //answerList.innerText = "";
+  console.log(answerList);
 
-
-for (var i =o; i < quizOptions.length; i++) {
-    var nextQuestion = document.createElement("Qbtn");
-
-    nextQuestion.textContent = quizOptions[i];
-    answer = quizOptions.appendChild(nextQuestion);
-
-}
+  var quizOptions = currentQ.options;
 
 
+  // Generate questions
+  for (var i = 0; i < quizOptions.length; i++) {
+    // creating button element to stick on page
+    var optionButton = document.createElement("button");
 
-  var choiceButton = document.createElement("button");
-  choiceButton.setAttribute("class" ,"options");
-  choiceButton.setAttribute("value" , options);
-  choiceButton.textContent = options;
-  choiceButton.onclick = answer;
+    // <button class="options"></button>
+    optionButton.setAttribute("class", "options");
+    // <button class="options" value="strings"></button>
+    optionButton.setAttribute("value", currentQ.options[i]);
+    // <button class="options" value="strings">strings</button>
+    optionButton.textContent = currentQ.options[i];
+    optionButton.addEventListener('click', function(event) {
+      console.log('wooooo!');
+    })
+
+    
+    //quizOptions.append(optionButton);
+    
+    answerList[i].innerHTML = "";
+    answerList[i].append(optionButton);
+
+  }
 
 
-var q1 = document.createElement("button")
-var q2 = document.createElement("button")
-var q3 = document.createElement("button")
-var q4 = document.createElement("button")
 
-//   <button onclick="myFunction()">Click me</button>
-// object.addEventListener("click", myScript);
+
+  // var q1 = document.createElement("button")
+  // var q2 = document.createElement("button")
+  // var q3 = document.createElement("button")
+  // var q4 = document.createElement("button")
+
+  //   <button onclick="myFunction()">Click me</button>
+  // object.addEventListener("click", myScript);
 
 
   // go to next question
   //gotoNextQuestion()
-//   addScore++;
-// answer = questions[addScore].answer
+  //   addScore++;
+  // answer = questions[addScore].answer
 
-// questionItem.textContent = questions[addScore].title
-// options.innerHTML = '';
-
-
+  // questionItem.textContent = questions[addScore].title
+  // options.innerHTML = '';
 
 
-// if (event.target.value === answerButtons);
-// console.log(questions);
+
+
+  // if (event.target.value === answerButtons);
+  // console.log(questions);
 }
 
 
