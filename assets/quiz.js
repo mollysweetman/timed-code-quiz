@@ -147,7 +147,6 @@ function gotoNextQuestion() {
 
 
 
-
   if (questions[0].answer === event.target.textContent) {
 
     console.log(questions[0].answer);
@@ -163,8 +162,18 @@ function gotoNextQuestion() {
 
 
   }
+
+  startGame();
 }
-//answerList.addEventListener("click", gotoNextQuestion);
+answerList.addEventListener("click", startGame);
+
+
+
+
+
+
+
+
 
 
 function showResults() {
