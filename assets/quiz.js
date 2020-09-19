@@ -9,6 +9,9 @@ var answerList = document.querySelectorAll('.answerOptions');
 var numberOfQuestionEl = 0;
 var answer;
 
+var displayedQuestion = 0
+
+
 
 hideElement(resultsContainer);
 hideElement(initials);
@@ -32,7 +35,7 @@ function hideElement(elementToHide) {
 
 startTimer.addEventListener('click', function () {
   startTimer.style.display = 'none';
-  //gotoNextQuestion();
+  
   secondsInterval = setInterval(function () {
     testTime--;
     showTime.innerText = testTime;
@@ -43,12 +46,16 @@ startTimer.addEventListener('click', function () {
 
   }, 1000);
 
-
 })
 
 
 
 var questions = [
+  {
+    testQuestions: "test question",
+    options: ["option1", "asdf", "different", "unique"],
+    answer: "option1"
+  },
   {
     testQuestions: "Commonly used data types DO NOT include:",
     options: ["strings", "booleans", "alerts", "numbers"],
@@ -84,6 +91,11 @@ var questions = [
 ];
 
 
+function removeStart() {
+  quizContainer.removeChild(startButton);
+  startGame();
+}
+
 
 startButton.addEventListener('click', startGame)
 
@@ -115,8 +127,9 @@ function startGame(event) {
     // <button class="options" value="strings">strings</button>
     optionButton.textContent = currentQ.options[i];
     optionButton.addEventListener('click', function (event) {
-      gotoNextQuestion();
-      //showResults()
+      showAnswer();
+      console.log('anything');
+      
     })
 
 
@@ -125,14 +138,14 @@ function startGame(event) {
     answerList[i].innerHTML = "";
     answerList[i].append(optionButton);
 
-    //gotoNextQuestion()
+    
   }
 }
 
-console.dir(questions);
 
-function gotoNextQuestion() {
-  var setNextQuestion = document.getElementsByClassName("nextButton");
+
+function showAnswer() {
+  var nextQuestionEl = document.getElementsByClassName("nextButton");
   var newButton = document.createElement("button");
   let answerElement = document.getElementsByClassName("answers")[0];
 
@@ -152,36 +165,52 @@ function gotoNextQuestion() {
     console.log(questions[0].answer);
 
     answerElement.innerHTML = "YES!";
-    setTimeout();
-    showElement;
+    // setTimeout();
+    // showElement;
   } else {
     answerElement.innerHTML = "WRONG!";
-    setTimeout();
+    // setTimeout();
     testTime = testTime - 10;
-    showElement;
-
-
+    // showElement;
   }
 
-  startGame();
-}
-answerList.addEventListener("click", startGame);
-
-
-
-
-
-
-
-
-
-
-function showResults() {
-  document.getElementById("quiz").classList.add('noDisplay');
-  document.getElementById("initials").classList.remove('noDisplay');
-  userScoreElement.textContent = "FINAL SCORE: " + "";
+  
+  newButton.addEventListener('click', function(){
+    startGame();
+    console.log('something');
+    
+  })
 }
 
+
+// answerList.addEventListener("click", startGame);
+
+
+
+
+
+
+
+
+
+
+// function showResults() {
+//   document.getElementById("quiz").classList.add('noDisplay');
+//   document.getElementById("initials").classList.remove('noDisplay');
+//   userScoreElement.textContent = "FINAL SCORE: " + "";
+// }
+
+
+
+
+
+
+
+
+// function gameLost() {
+// 	questionItem.textContent = "You lost! Try again!";
+// 	return;
+// }
   //   addScore++;
   // answer = questions[addScore].answer
 
