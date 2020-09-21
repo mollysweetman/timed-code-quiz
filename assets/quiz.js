@@ -2,14 +2,14 @@ var quizContainer = document.getElementById('container');
 var resultsContainer = document.querySelector('.score-container');
 var initials = document.querySelector('.initials-container');
 var startButton = document.getElementById('start');
-var correctAnswer = document.getElementsByClassName('answerCorrect');
-var incorrectAnswer = document.getElementsByClassName('answerIncorrect');
 
 var questionItem = document.getElementById('questions');
 var answerList = document.querySelectorAll('.answerOptions');
 
 var numberOfQuestionEl = 0;
 var answer;
+
+var score;
 
 var displayedQuestion = 0
 
@@ -38,7 +38,7 @@ function hideElement(elementToHide) {
 
 startTimer.addEventListener('click', function () {
   startTimer.style.display = 'none';
-  
+
   secondsInterval = setInterval(function () {
     testTime--;
     showTime.innerText = testTime;
@@ -54,7 +54,7 @@ startTimer.addEventListener('click', function () {
 
 
 var questions = [
-  
+
   {
     testQuestions: "Commonly used data types DO NOT include:",
     options: ["strings", "booleans", "alerts", "numbers"],
@@ -96,7 +96,7 @@ var questions = [
 startButton.addEventListener('click', startGame)
 
 function startGame(event) {
- 
+
   startButton.style.display = 'hide';
 
   var currentQ = questions[numberOfQuestionEl]
@@ -126,7 +126,7 @@ function startGame(event) {
     optionButton.addEventListener('click', function (event) {
       showAnswer();
       console.log('anything');
-      
+
     })
 
 
@@ -135,7 +135,7 @@ function startGame(event) {
     answerList[i].innerHTML = "";
     answerList[i].append(optionButton);
 
-    
+
   }
 }
 
@@ -148,7 +148,7 @@ function showAnswer() {
 
   // <button class="options"></button>
   newButton.setAttribute("class", "nextButton");
-  
+
   // <button class="options" value="strings">strings</button>
   newButton.textContent = "nextButton";
 
@@ -161,36 +161,37 @@ function showAnswer() {
 
     console.log(questions[0].answer);
 
+  }
+  var createDiv = document.createElement("div");
+  createDiv.setAttribute("id", "createDiv");
+
+  if (answer.textContent == questions[displayedQuestion].answer) {
+    score++;
+    createDiv.textContent = "Correct!";
     
-    // var createDiv = document.createElement("div");
-    //     createDiv.setAttribute("id", "createDiv");
+  }
 
-    //     if (choice.textContent == questions[questionIndex].correctAnswer) {
-    //         score++;
-    //         createDiv.textContent = "Correct!";
-    //     }
+  else {
+    //secondsLeft = secondsLeft - penalty;
+    createDiv.textContent = "Incorrect! The correct answer is: " + questions[displayedQuestion].answer;
+  }
 
-    //     else {
-    //         secondsLeft = secondsLeft - penalty;
-    //         createDiv.textContent = "Incorrect! The correct answer is: " + questions[questionIndex].correctAnswer;
-    //     }
-      }
 
-    // answerElement.innerHTML = "YES!";
-    // setTimeout();
-    // showElement;
+  // answerElement.innerHTML = "YES!";
+  // setTimeout();
+  // showElement;
   //} else {
-    // answerElement.innerHTML = "WRONG!";
-    // setTimeout();
-    //testTime = testTime - 10;
-    // showElement;
-  
+  // answerElement.innerHTML = "WRONG!";
+  // setTimeout();
+  //testTime = testTime - 10;
+  // showElement;
 
-  
-  newButton.addEventListener('click', function(){
+
+
+  newButton.addEventListener('click', function () {
     startGame();
     console.log('something');
-    
+
   })
 }
 
@@ -211,7 +212,6 @@ function showAnswer() {
 //   document.getElementById("initials").classList.remove('noDisplay');
 //   userScoreElement.textContent = "FINAL SCORE: " + "";
 // }
-
 
 
 
