@@ -2,6 +2,8 @@ var quizContainer = document.getElementById('container');
 var resultsContainer = document.querySelector('.score-container');
 var initials = document.querySelector('.initials-container');
 var startButton = document.getElementById('start');
+var correctAnswer = document.getElementsByClassName('answerCorrect');
+var incorrectAnswer = document.getElementsByClassName('answerIncorrect');
 
 var questionItem = document.getElementById('questions');
 var answerList = document.querySelectorAll('.answerOptions');
@@ -10,6 +12,7 @@ var numberOfQuestionEl = 0;
 var answer;
 
 var displayedQuestion = 0
+
 
 
 
@@ -51,11 +54,7 @@ startTimer.addEventListener('click', function () {
 
 
 var questions = [
-  {
-    testQuestions: "test question",
-    options: ["option1", "asdf", "different", "unique"],
-    answer: "option1"
-  },
+  
   {
     testQuestions: "Commonly used data types DO NOT include:",
     options: ["strings", "booleans", "alerts", "numbers"],
@@ -91,15 +90,13 @@ var questions = [
 ];
 
 
-function removeStart() {
-  quizContainer.removeChild(startButton);
-  startGame();
-}
+
 
 
 startButton.addEventListener('click', startGame)
 
 function startGame(event) {
+ 
   startButton.style.display = 'hide';
 
   var currentQ = questions[numberOfQuestionEl]
@@ -164,15 +161,30 @@ function showAnswer() {
 
     console.log(questions[0].answer);
 
-    answerElement.innerHTML = "YES!";
+    
+    // var createDiv = document.createElement("div");
+    //     createDiv.setAttribute("id", "createDiv");
+
+    //     if (choice.textContent == questions[questionIndex].correctAnswer) {
+    //         score++;
+    //         createDiv.textContent = "Correct!";
+    //     }
+
+    //     else {
+    //         secondsLeft = secondsLeft - penalty;
+    //         createDiv.textContent = "Incorrect! The correct answer is: " + questions[questionIndex].correctAnswer;
+    //     }
+      }
+
+    // answerElement.innerHTML = "YES!";
     // setTimeout();
     // showElement;
-  } else {
-    answerElement.innerHTML = "WRONG!";
+  //} else {
+    // answerElement.innerHTML = "WRONG!";
     // setTimeout();
-    testTime = testTime - 10;
+    //testTime = testTime - 10;
     // showElement;
-  }
+  
 
   
   newButton.addEventListener('click', function(){
@@ -207,10 +219,21 @@ function showAnswer() {
 
 
 
+
+
+
+
 // function gameLost() {
 // 	questionItem.textContent = "You lost! Try again!";
 // 	return;
 // }
+
+
+
+
+
+
+
   //   addScore++;
   // answer = questions[addScore].answer
 
