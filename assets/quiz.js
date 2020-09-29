@@ -11,7 +11,8 @@ var answer;
 
 var score;
 
-var displayedQuestion = 0
+
+//var penalty = -10;
 
 
 
@@ -45,6 +46,7 @@ startTimer.addEventListener('click', function () {
     if (testTime === 0 || numberOfQuestionEl === questions.length) {
       clearInterval(secondsInterval);
       setTimeout(showResults);
+      endGame();
     }
 
   }, 1000);
@@ -96,7 +98,11 @@ var questions = [
 startButton.addEventListener('click', startGame)
 
 function startGame(event) {
+  if (numberOfQuestionEl === questions.length) {
+    //end of questions, end game
+    return endGame();
 
+  }
   startButton.style.display = 'hide';
 
   var currentQ = questions[numberOfQuestionEl]
@@ -143,75 +149,56 @@ function startGame(event) {
 
 function showAnswer() {
   var nextQuestionEl = document.getElementsByClassName("nextButton");
-  var newButton = document.createElement("button");
+
   let answerElement = document.getElementsByClassName("answers")[0];
 
-  // <button class="options"></button>
-  newButton.setAttribute("class", "nextButton");
 
-  // <button class="options" value="strings">strings</button>
-  newButton.textContent = "nextButton";
+  var userSelection = this.event.target;
+  console.log(userSelection);
 
 
-  document.querySelector(".nextButton").appendChild(newButton);
+  //var answerDiv = document.createElement("div");
+  //answerDiv.setAttribute("id", "answerDiv");
+  var answerDiv = document.querySelector('#results');
 
+  console.log('condition', userSelection.textContent,  questions[numberOfQuestionEl - 1].answer);
 
-
-  if (questions[0].answer === event.target.textContent) {
-
-    console.log(questions[0].answer);
-
-  }
-  var createDiv = document.createElement("div");
-  createDiv.setAttribute("id", "createDiv");
-
-  if (answer.textContent == questions[displayedQuestion].answer) {
-    score++;
-    createDiv.textContent = "Correct!";
-    
+  if (userSelection.textContent == questions[numberOfQuestionEl - 1].answer) {
+    // score++;
+    // answerDiv.textContent = "Correct!";
+    // console.log(answerDiv);
+    alert('Correct');
+    startGame();
   }
 
   else {
-    //secondsLeft = secondsLeft - penalty;
-    createDiv.textContent = "Incorrect! The correct answer is: " + questions[displayedQuestion].answer;
+    console.log();
+    //incorrect answer is displayed
+    //answerDiv.textContent = "Incorrect! The correct answer is: " + questions[displayedQuestion].answer;
+    //time is docked -10 seconds
+    //secondsInterval = secondsInterval - penalty;
+    alert("Incorrect");
+    startGame();
   }
 
 
-  // answerElement.innerHTML = "YES!";
-  // setTimeout();
-  // showElement;
-  //} else {
-  // answerElement.innerHTML = "WRONG!";
-  // setTimeout();
-  //testTime = testTime - 10;
-  // showElement;
 
 
 
-  newButton.addEventListener('click', function () {
-    startGame();
-    console.log('something');
-
-  })
 }
 
 
-// answerList.addEventListener("click", startGame);
 
+function endGame() {
+alert('The game is over');
 
+}
 
-
-
-
-
-
-
-
-// function showResults() {
-//   document.getElementById("quiz").classList.add('noDisplay');
-//   document.getElementById("initials").classList.remove('noDisplay');
-//   userScoreElement.textContent = "FINAL SCORE: " + "";
-// }
+function showResults() {
+  document.getElementById("quiz").classList.add('noDisplay');
+  document.getElementById("initials").classList.remove('noDisplay');
+  //userScoreElement.textContent = "FINAL SCORE: " + "";
+}
 
 
 
